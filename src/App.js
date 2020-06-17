@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import  { Map, TileLayer, Marker } from 'react-leaflet'
 import L from 'leaflet'
+import Input from './components/Input'
 function App() {
   const [IssPosition, setIssPosition] = useState({ lat: 0, long: 0 })
   const [ ZoomLevel, setZoomLevel] = useState(5)
@@ -36,7 +37,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Zoom Level: {ZoomLevel}</h1>
+      <Input />
       <Map center={[IssPosition.lat, IssPosition.long]}  zoom={ZoomLevel} onzoomend={handleZoomEnd}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
