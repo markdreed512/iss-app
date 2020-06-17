@@ -31,7 +31,6 @@ function App() {
       className: 'leaflet-div-icon'
   });
   const handleZoomEnd = (e) => {
-    console.log(e.target)
     setZoomLevel(e.target._zoom)
   }
 
@@ -45,7 +44,6 @@ function App() {
         />
         <Marker position={[IssPosition.lat, IssPosition.long]} icon={issIcon} />
       </Map>
-      
     </div>
   );
 }

@@ -1,0 +1,13 @@
+problems:
+----------------------
+-when I fetch data from API, before I can see it in a console.log, it refreshes and I lose my console
+-possible solutions: async await?
+-I need to make sure it doesn't refresh until the state is set with data from API
+-duh, I needed to preventDefault
+--------------------------
+Now it gets the data and sets the state in the second '.then', but doesn't update the component until the next time you search (always one search behind)
+-maybe useEffect to force update?
+-tried this in getData, got this error, maybe the state variables are out of scope too?
+"React Hook useEffect has an unnecessary dependency: 'lat'. Either exclude it or remove the dependency array. Outer scope values like 'lat' aren't valid dependencies because mutating them doesn't re-render the component.eslint(react-hooks/exhaustive-deps)"
+
+solution: in handleSubmit (nee "getData") i just set searchQuery state. Then in useEffect, relied on searchQuery to trigger the data fetching. 
