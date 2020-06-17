@@ -29,11 +29,15 @@ function App() {
       iconAnchor: [20,20],
       className: 'leaflet-div-icon'
   });
+  const handleZoomEnd = (e) => {
+    console.log(e.target)
+    setZoomLevel(e.target._zoom)
+  }
 
   return (
     <div className="App">
-      
-      <Map center={[IssPosition.lat, IssPosition.long]}  zoom={ZoomLevel}>
+      <h1>Zoom Level: {ZoomLevel}</h1>
+      <Map center={[IssPosition.lat, IssPosition.long]}  zoom={ZoomLevel} onzoomend={handleZoomEnd}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
