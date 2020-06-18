@@ -23,7 +23,7 @@ function Input() {
     useEffect(() => {
         if (lat && long) {
             //get iss pass times when lat or long update
-            const url = `https://cors-anywhere.herokuapp.com/http://api.open-notify.org/iss-pass.json?lat=${lat}&lon=${long}`
+            const url = `https://cors-anywhere.herokuapp.com/http://api.open-notify.org/iss-pass.json?lat=${lat}&lon=${long}&n=5`
             fetch(url)
                 .then((response) => response.json())
                 .then((data) => {
