@@ -6,6 +6,7 @@ function Input() {
     const [searchQuery, setSearchQuery] = useState("")
     const [city, setCity] = useState("")
     const [dates, setDates] = useState([])
+    
 
     useEffect(() => {
         const apiKey = "4b2ccb0553c346ef9b0782e991f3eb1d"
@@ -23,7 +24,7 @@ function Input() {
     useEffect(() => {
         if (lat && long) {
             //get iss pass times when lat or long update
-            const url = `https://cors-anywhere.herokuapp.com/http://api.open-notify.org/iss-pass.json?lat=${lat}&lon=${long}&n=70`
+            const url = `https://cors-anywhere.herokuapp.com/http://api.open-notify.org/iss-pass.json?lat=${lat}&lon=${long}&n=40`
             fetch(url)
                 .then((response) => response.json())
                 .then((data) => {
@@ -43,6 +44,7 @@ function Input() {
             <Display
                 dates={dates}
                 lat={lat}
+
                 long={long}
                 city={city}
             />
