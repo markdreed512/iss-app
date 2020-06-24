@@ -17,7 +17,7 @@ function Display(props) {
         return (
             <div>
                 <h1>{`ISS Passes for ${props.city}:`}</h1>
-                <Container component={Paper} className={classes.paper}>
+                <Container component={Paper} className={classes.paper} elevation={3}>
                 <Table className={classes.table} size="small" aria-label="a dense table">
                     <TableHead>
                         <TableRow>
