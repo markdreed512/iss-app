@@ -4,6 +4,7 @@ import IssMap from './components/IssMap'
 import Home from './components/Home'
 import Input from './components/Input'
 import NavBar from './components/NavBar'
+
 function App() {
   const [ page, setPage ] = useState("input")
   const handleNavClick = (e) => {
@@ -11,14 +12,12 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <>
       <NavBar handleClick={handleNavClick}/>
       { page === "input"? <Input /> :
         page === "map"? <IssMap /> : <Home />
       }
-      
-     
-    </div>
+    </>
   );
 }
 

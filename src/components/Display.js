@@ -8,7 +8,7 @@ const useStyles = makeStyles({
       width: "100%"
     },
     paper: {
-        maxWidth: "40%"
+        maxWidth: "100%"
     }
   });
 function Display(props) {
@@ -16,8 +16,9 @@ function Display(props) {
     if (props.dates) {
         return (
             <div>
-                <h1>{`ISS Passes for ${props.city}:`}</h1>
+                
                 <Container component={Paper} className={classes.paper} elevation={3}>
+                <h1>{`ISS Passes for ${props.city}:`}</h1>
                 <Table className={classes.table} size="small" aria-label="a dense table">
                     <TableHead>
                         <TableRow>

@@ -1,12 +1,23 @@
 import React, { useState, useEffect } from 'react'
 import Display from './Display'
+import { makeStyles, Container } from '@material-ui/core'
+
+const useStyles = makeStyles({
+    container: {
+        maxWidth: "40%"
+    },
+    input: {
+        marginTop: "20px"
+    }
+})
+
 function Input() {
     const [lat, setLat] = useState("")
     const [long, setLong] = useState("")
     const [searchQuery, setSearchQuery] = useState("")
     const [city, setCity] = useState("")
     const [dates, setDates] = useState([])
-    
+    const classes = useStyles()
 
     useEffect(() => {
         const apiKey = "4b2ccb0553c346ef9b0782e991f3eb1d"
@@ -19,7 +30,7 @@ function Input() {
                     setLong(data.results[0].geometry.lng)
                     setCity(data.results[0].components.city)
                 })
-            }
+        }
     }, [searchQuery])
     useEffect(() => {
         if (lat && long) {
@@ -40,7 +51,11 @@ function Input() {
 
 
     return (
-        <>
+        <Container className={classes.container}>
+            <form onSubmit={handleSubmit} className={classes.input}>
+                <input placeholder="city or zip code" />
+                <button>OK</button>
+            </form>
             <Display
                 dates={dates}
                 lat={lat}
@@ -48,11 +63,7 @@ function Input() {
                 long={long}
                 city={city}
             />
-            <form onSubmit={handleSubmit}>
-                <input placeholder="city or zip code" />
-                <button>OK</button>
-            </form>
-        </>
+        </Container>
     )
 }
 

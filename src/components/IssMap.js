@@ -1,10 +1,20 @@
 import React, { useEffect , useState } from 'react'
 import  { Map, TileLayer, Marker } from 'react-leaflet'
 import L from 'leaflet'
+import { makeStyles } from '@material-ui/core'
+
+const useStyles = makeStyles({
+  mapStyles: {
+    marginTop: "20px",
+    borderRadius: "10px",
+    boxShadow: "0px 0px 10px grey"
+  }
+})
 
 function IssMap() {
   const [IssPosition, setIssPosition] = useState({ lat: 0, long: 0 })
   const [ ZoomLevel, setZoomLevel] = useState(5)
+  const classes = useStyles()
   
   const getIssPosition = () => {
     fetch('http://api.open-notify.org/iss-now.json')
@@ -34,7 +44,12 @@ function IssMap() {
     setZoomLevel(e.target._zoom)
   }
     return (
-        <Map center={[IssPosition.lat, IssPosition.long]}  zoom={ZoomLevel} onzoomend={handleZoomEnd}>
+        <Map 
+          center={[IssPosition.lat, IssPosition.long]}  
+          zoom={ZoomLevel} 
+          onzoomend={handleZoomEnd}
+          className={classes.mapStyles}  
+        >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
