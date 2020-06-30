@@ -11,15 +11,31 @@ const useStyles = makeStyles({
         maxWidth: "100%"
     }
   });
+
 function Display(props) {
     const classes = useStyles()
+    const displayLocation = () => {
+        let country
+        if(props.country === "United States of America"){
+            country = "USA"
+        }else{
+            country = props.country
+        }
+        if(props.city){
+            return props.state? `${props.city}, ${props.state}, ${country}` : `${props.city}, ${country}`
+        }else if (props.zip){
+            return props.state? `${props.zip}, ${props.state}, ${country}` : `${props.zip}`
+        }else {
+            return "handle error here"
+        }
+    }
     if (props.dates) {
         return (
             <div>
                 
                 <Container component={Paper} className={classes.paper} elevation={3}>
-                <h1>{`ISS Passes for ${props.city}:`}</h1>
-                <Table className={classes.table} size="small" aria-label="a dense table">
+                <h1>Passes for {displayLocation()}</h1>
+                <Table className={classes.table} size="small">
                     <TableHead>
                         <TableRow>
                                 <TableCell>Day</TableCell>

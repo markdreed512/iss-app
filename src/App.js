@@ -1,21 +1,22 @@
 import React, { useState } from 'react';
 import './App.css';
-import IssMap from './components/IssMap'
+import MapView from './components/MapView'
 import Home from './components/Home'
-import Input from './components/Input'
+import PassesView from './components/PassesView'
 import NavBar from './components/NavBar'
 
 function App() {
   const [ page, setPage ] = useState("input")
   const handleNavClick = (e) => {
+    console.log(e.currentTarget)
     setPage(e.currentTarget.id)
   }
 
   return (
     <>
       <NavBar handleClick={handleNavClick}/>
-      { page === "input"? <Input /> :
-        page === "map"? <IssMap /> : <Home />
+      { page === "input"? <PassesView /> :
+        page === "map"? <MapView /> : <Home />
       }
     </>
   );
