@@ -4,9 +4,11 @@ import MapView from './components/MapView'
 import Home from './components/Home'
 import PassesView from './components/PassesView'
 import NavBar from './components/NavBar'
+import Modal from './components/ErrorModal'
 
 function App() {
   const [ page, setPage ] = useState("input")
+  
   const handleNavClick = (e) => {
     console.log(e.currentTarget)
     setPage(e.currentTarget.id)

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Display from './Display'
 import { makeStyles, Container, TextField, Button, Typography, Grid } from '@material-ui/core'
+import ErrorModal from './ErrorModal'
 
 const useStyles = makeStyles({
     container: {
@@ -13,6 +14,10 @@ const useStyles = makeStyles({
     },
     input: {
         width: "100%"
+    },
+    button: {
+        height: "55px",
+        marginLeft: "5px"
     }
 })
 
@@ -27,8 +32,10 @@ function PassesView() {
     const [dates, setDates] = useState([])
     const [inputValue, setInputValue] = useState("")
     const [listIsVisible, setListIsVisible] = useState(false)
+    const [modalOpen, setModalOpen] = useState(false)
+
     const classes = useStyles()
-    
+
 
     useEffect(() => {
         const apiKey = "4b2ccb0553c346ef9b0782e991f3eb1d"
@@ -37,13 +44,19 @@ function PassesView() {
             fetch(url)
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data.results[0].components)
-                    setLat(data.results[0].geometry.lat)
-                    setLong(data.results[0].geometry.lng)
-                    setCity(data.results[0].components.city)
-                    setCountry(data.results[0].components.country)
-                    setZip(data.results[0].components.postcode)
-                    setState(data.results[0].components.state)
+                    console.log(data)
+                    if (data.results[0]) {
+                        setLat(data.results[0].geometry.lat)
+                        setLong(data.results[0].geometry.lng)
+                        setCity(data.results[0].components.city)
+                        setCountry(data.results[0].components.country)
+                        setZip(data.results[0].components.postcode)
+                        setState(data.results[0].components.state)
+                        setListIsVisible(true)
+                    } else {
+                        setModalOpen(true)
+                    }
+
                 })
         }
     }, [searchQuery])
@@ -61,47 +74,62 @@ function PassesView() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        setSearchQuery(inputValue)
-        setListIsVisible(true)
+        if (inputValue) {
+            setSearchQuery(inputValue)
+            setInputValue("")
+        }
+
     }
     const handleInputChange = (e) => {
         setInputValue(e.target.value)
     }
+    const handleModalClose = (e) => {
+        e.preventDefault()
+        console.log(e.target)
+        setModalOpen(false)
+    }
 
     return (
         <Container className={classes.container}>
-            <Typography variant="h2">
-                When can I see the Space Station?
+                <Typography variant="h2" align="center">
+                    When can I see the Space Station?
             </Typography>
 
-            <form onSubmit={handleSubmit} className={classes.form}>
-                <Grid container>
-                    <Grid item xs={10}>
-                        {/* <Input placeholder="city or zip code" className={classes.input} /> */}
-                        <TextField 
-                            label="city or zip code" 
-                            variant="outlined" 
-                            className={classes.input} 
-                            onChange={handleInputChange}
-                        />
+                <form onSubmit={handleSubmit} className={classes.form}>
+                    <Grid container>
+                        <Grid item xs={10}>
+                            <TextField
+                                label="city or zip code"
+                                variant="outlined"
+                                className={classes.input}
+                                onChange={handleInputChange}
+                                value={inputValue}
+                            />
+
+                        </Grid>
+                        <Grid item xs={2}>
+                            <Button
+                                type="submit"
+                                variant="outlined"
+                                color="primary"
+                                className={classes.button}
+                            >
+                                OK
+                        </Button>
+                        </Grid>
 
                     </Grid>
-                    <Grid item xs={2}>
-                        <Button type="submit">OK</Button>
-                    </Grid>
-
-                </Grid>
-            </form>
-            { listIsVisible?  <Display
-                dates={dates}
-                lat={lat}
-                long={long}
-                city={city}
-                state={state}
-                zip={zip}
-                country={country}
-            /> : <></>}
-            
+                </form>
+                {listIsVisible ? <Display
+                    dates={dates}
+                    lat={lat}
+                    long={long}
+                    city={city}
+                    state={state}
+                    zip={zip}
+                    country={country}
+                /> : <></>}
+                <ErrorModal handleClose={handleModalClose} open={modalOpen}/>
         </Container>
     )
 }
