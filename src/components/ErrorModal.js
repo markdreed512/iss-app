@@ -25,19 +25,18 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
     outline: '0',
-    borderRadius: "5px"
+    borderRadius: "5px",
+    textAlign: "center"
   },
+  button: {
+    fontSize: "16px",
+    padding: "7px"
+  }
 }));
 
 export default function SimpleModal(props) {
   const classes = useStyles();
-  // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = useState(getModalStyle);
-
-
-  // const handleClose = () => {
-  //   setOpen(false);
-  // };
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
@@ -45,7 +44,11 @@ export default function SimpleModal(props) {
       <p id="simple-modal-description">
         Please enter City or Zip Code
       </p>
-      <button type="button" onClick={props.handleClose}>
+      <button 
+        type="button"  
+        className={classes.button} 
+        onClick={props.handleClose}
+      >
         OK
       </button>
     </div>

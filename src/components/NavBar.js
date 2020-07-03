@@ -32,7 +32,7 @@ function NavBar(props) {
                     <Typography variant="h6" className={classes.title}>
                         ISS: Where and When
                     </Typography>
-                    <Button className={classes.button} onClick={props.handleClick} id="home">Home</Button>
+                    {/* <Button className={classes.button} onClick={props.handleClick} id="home">Home</Button> */}
                     <Button className={classes.button} onClick={props.handleClick} id="map">Where</Button>
                     <Button className={classes.button} onClick={props.handleClick} id="input">When</Button>
                 </Toolbar>

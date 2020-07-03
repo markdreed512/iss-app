@@ -7,7 +7,7 @@ import NavBar from './components/NavBar'
 import Modal from './components/ErrorModal'
 
 function App() {
-  const [ page, setPage ] = useState("input")
+  const [ page, setPage ] = useState("map")
   
   const handleNavClick = (e) => {
     console.log(e.currentTarget)
