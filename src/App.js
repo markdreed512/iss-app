@@ -1,26 +1,37 @@
-import React, { useState } from 'react';
+import React from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 import './App.css';
 import MapView from './components/MapView'
-import Home from './components/Home'
 import PassesView from './components/PassesView'
 import NavBar from './components/NavBar'
-import Modal from './components/ErrorModal'
 
 function App() {
-  const [ page, setPage ] = useState("map")
-  
-  const handleNavClick = (e) => {
-    console.log(e.currentTarget)
-    setPage(e.currentTarget.id)
-  }
+  // const [page, setPage] = useState("map")
+
+  // const handleNavClick = (e) => {
+  //   console.log(e.currentTarget)
+  //   setPage(e.currentTarget.id)
+  // }
 
   return (
-    <>
-      <NavBar handleClick={handleNavClick}/>
-      { page === "input"? <PassesView /> :
-        page === "map"? <MapView /> : <Home />
-      }
-    </>
+    <Router>
+      
+      <NavBar />
+      <Switch>
+
+        <Route path="/passes">
+          <PassesView />
+        </Route>
+        <Route exact path="/">
+          <MapView />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 
