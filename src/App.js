@@ -23,7 +23,6 @@ function App() {
       
       <NavBar />
       <Switch>
-
         <Route path="/passes">
           <PassesView />
         </Route>

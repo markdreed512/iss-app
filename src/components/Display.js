@@ -30,6 +30,7 @@ function Display(props) {
         }
     }
     if (props.dates) {
+        console.log("dates: " + props.dates)
         return (
             <div>
                 

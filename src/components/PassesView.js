@@ -44,7 +44,7 @@ function PassesView() {
             fetch(url)
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data)
+                    // data.results[0] validated
                     if (data.results[0]) {
                         setLat(data.results[0].geometry.lat)
                         setLong(data.results[0].geometry.lng)
@@ -60,13 +60,17 @@ function PassesView() {
                 })
         }
     }, [searchQuery])
+
     useEffect(() => {
         if (lat && long) {
             //get iss pass times when lat or long update
-            const url = `https://cors-anywhere.herokuapp.com/http://api.open-notify.org/iss-pass.json?lat=${lat}&lon=${long}&n=40`
+            const url = `http://cors-anywhere.herokuapp.com/http://api.open-notify.org/iss-pass.json?lat=${lat}&lon=${long}&n=40`
+            // const url = `http://api.open-notify.org/iss-pass.json?lat=${lat}&lon=${long}&n=40`
+
             fetch(url)
                 .then((response) => response.json())
                 .then((data) => {
+                    console.log("data response from passes call: " + data.response)
                     setDates(data.response)
                 })
         }
@@ -91,7 +95,7 @@ function PassesView() {
 
     return (
         <Container className={classes.container}>
-                <Typography variant="h2" align="center">
+            <Typography variant="h2" align="center">
                     When can I see the Space Station?
             </Typography>
 
