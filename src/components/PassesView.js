@@ -95,7 +95,7 @@ function PassesView() {
 
     return (
         <Container className={classes.container}>
-            <Typography variant="h2" align="center">
+            <Typography variant="h4" align="center">
                     When can I see the Space Station?
             </Typography>
 
