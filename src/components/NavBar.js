@@ -15,7 +15,7 @@ const Nav = styled.nav`
 `
 const Li = styled.li`
     display: inline;
-    margin-right: 10px;
+    margin-right: 20px;
 `
 const Ul = styled.ul`
     margin: 0;
@@ -26,8 +26,8 @@ function NavBar(){
         <Nav>
             <div>ISS:Where and When</div>
             <Ul>
-                <Li><Link to="/">Where</Link></Li>
-                <Li><Link to="/passes">When</Link></Li>
+                <Li><Link to="/">Where </Link></Li>
+                <Li><Link to="/passes">When </Link></Li>
             </Ul>
         </Nav>
     )

@@ -21,11 +21,11 @@ function IssMap() {
   const classes = useStyles()
 
   const getIssPosition = () => {
-    fetch('http://api.open-notify.org/iss-now.json')
+    fetch('https://api.wheretheiss.at/v1/satellites/25544/')
       .then(response => response.json())
       .then(data => {
-        let lat = data.iss_position.latitude
-        let long = data.iss_position.longitude
+        let lat = data.latitude
+        let long = data.longitude
         setIssPosition({ lat, long })
       });
   }
